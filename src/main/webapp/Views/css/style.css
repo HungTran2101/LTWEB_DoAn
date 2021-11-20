@@ -1,0 +1,221 @@
+@charset "ISO-8859-1";
+.body{
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    font-family: sans-serif;
+}
+.Log_Res_container{
+    padding-top: 150px;
+}
+.log_res_Form{
+    margin: 0 auto;
+    display:flex;
+    flex-direction: column;
+    background-color: white;
+    width: 450px;
+    border: 1px solid rgb(172, 172, 172);
+    border-radius: 5px;
+}
+.log_res_Form span{
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding: 7px 20px;
+    border-bottom: 1px solid rgb(172, 172, 172);
+    border-radius: 5px 5px 0 0; 
+    background-color: #f5f5f5;
+}
+.log_res_Form div{
+    display:flex;
+    align-items: center;
+    margin: 5px 20px 5px 20px;
+}
+.log_res_Form div input{
+    margin: 0 10px 0 0;
+    border: 1px solid rgb(172, 172, 172);
+}
+.log_res_Form button{
+    font-family: sans-serif;
+    font-size: 20px;
+    color: white;
+    margin: 5px 20px 10px 20px;
+    padding: 10px 30px;
+    background-color:#5cb85c;
+    border: 1px solid rgb(35, 192, 35);
+    border-radius: 5px;
+}
+.log_res_Form button:hover{
+    cursor: pointer;
+    background-color:#50a050;
+}
+.log_res_Form input[type=email], .log_res_Form input[type=text], .log_res_Form input[type=password]{
+    margin: 10px 20px;
+    padding-left: 10px;
+    font-size: 16px;
+    height: 40px;
+    border: 1px solid rgb(172, 172, 172);
+    border-radius: 5px;
+}
+.log_res_Form input:focus{
+    outline: 1px solid #7dbbec;
+    box-shadow: 0 0 10px #7dbbec;
+}
+.log_res_Form a{
+    margin: 5px 20px 15px 20px;
+    width:fit-content;
+    text-decoration: none;
+    color: #5294c9;
+}
+
+.mySearchInput{
+	width: 100%;
+    border: 1px solid #d0d0d0;
+    border-right: none;
+    padding: 5px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9dbfaf;
+	
+}
+
+
+.mySearchInput:focus{
+	color: #000;
+}
+
+.mySearchBtn{
+	border: 1px solid #d0d0d0;
+    background: #fff;
+    text-align: center;
+    color: #363433;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 15px;
+	
+}
+
+.mySearchBtn:hover{
+	background: #eee;
+}
+
+.myBody{
+	width: 80vw;
+}
+
+.myView {
+   		width: 80vw;
+}
+
+.myPage{
+   	width: fit-content;
+    margin:auto auto;
+}
+
+.myAddForm {
+	width: 80%;
+}
+
+.myAddForm {
+   	flex: 3;
+   }
+   
+.test {
+	display: flex;
+	flex-direction: row;
+}
+   
+label {
+   font-weight: bold;
+}
+
+.myEditForm {
+   flex:2;
+}
+
+.myMenu {
+   	height: 93.5vh;
+   	border-radius: 0;
+}
+
+#myView{
+	display: none;
+}
+
+#mySpinner{
+	font-size: 36px;
+	margin-left: 5vw;
+	margin-top: 5vh;
+}
+
+.invalid{
+       border-color: red;
+    }
+   .formInput{
+       margin-top: 10px;
+       margin-bottom: 2rem;
+       padding-left: 1rem;
+   }
+   .form-message{
+       position:absolute;
+       color: red;
+   }
+.myBtn{
+	width: fit-content;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 20px 0 30px;
+    color: #000;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #e8e8e8;
+}
+.myBtn:hover{
+	background-color: #eee;
+}
+
+.myInput{
+	width: 80%;
+}
+
+.myFrame{
+	padding-left: 1rem;
+}
+
+.myHeader{
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+
+.mySearchInput{
+	border-radius: 5px 0px 0px 5px;
+}
+
+.mySearchBtn{
+	border-radius: 0px 5px 5px 0px;
+	border-color: #d0d0d0;
+}
+.list-group-item{
+	border-right: none; 
+}
+.col1 {
+	width: 10%;
+}
+.col2 {
+	width: 15%;
+}
+.col3 {
+	width: 45%;
+}
+.col4 {
+	width: 15%;
+}
+.col5 {
+	width: 15%;
+}
+
+.blue {
+	color: #337ab7;
+}
+.green{
+	background-color: #5cb85c;
+}
