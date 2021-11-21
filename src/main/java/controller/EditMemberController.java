@@ -36,6 +36,7 @@ public class EditMemberController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String firstName = request.getParameter("firstName");
+		System.out.print(firstName);
 		String lastName = request.getParameter("lastName");
 		String phone = request.getParameter("phone");
 		String description = request.getParameter("description");

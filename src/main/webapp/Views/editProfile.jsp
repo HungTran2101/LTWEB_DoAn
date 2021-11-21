@@ -4,7 +4,7 @@
 	<%@ page import="dao.MemberDAO" %>
 	<%@ page import="common.Constants" %>
 	<%
-		MemberModel member = MemberDAO.getMemberById(Constants.idMember);
+		MemberModel member = MemberDAO.getMemberById((Integer)request.getSession().getAttribute("userID"));
 	%>
 	<div class = "d-flex">
 		<div class = "p-4 myEditForm">
@@ -53,6 +53,12 @@
         document.getElementById("lastName").value = "";
         document.getElementById("phone").value = "";
         document.getElementById("description").value = "";
+    }
+    
+    const setValue = () => {
+    	const test = document.getElementById("firstName").value;
+    	console.log(test);
+    	
     }
     
 	</script>

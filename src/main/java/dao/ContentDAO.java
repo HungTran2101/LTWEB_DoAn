@@ -10,6 +10,7 @@ import common.Constants;
 import model.ContentModel;
 import mydb.DB;
 
+
 public class ContentDAO {
 	
 	//add content
@@ -109,6 +110,7 @@ public class ContentDAO {
 			{
 				content.setId(rs.getInt(1));
 				content.setTitle(rs.getString(2));
+				System.out.println(content.getTitle());
 				content.setBrief(rs.getString(3));
 				content.setContent(rs.getString(4));
 			}
@@ -213,11 +215,12 @@ public class ContentDAO {
 		return lst;
 	}
 	
-	public static List<ContentModel> getAllContentsBySearch(String search)
+	public static int getAllContentsBySearch(String search)
 	{
-		List<ContentModel> listContents = new ArrayList<ContentModel>();
 		
-		String query = "SELECT ID, TITLE, BRIEF, CREATEDATE FROM CONTENT WHERE (TITLE LIKE '%" + search + "%' OR BRIEF LIKE '%" + search + "%') AND AUTHORID =" + Constants.idMember;
+		int n = 0;
+		
+		String query = "SELECT COUNT(*) FROM CONTENT WHERE (TITLE LIKE '%" + search + "%' OR BRIEF LIKE '%" + search + "%') AND AUTHORID =" + Constants.idMember;
 		
 		
 		
@@ -229,12 +232,7 @@ public class ContentDAO {
 			
 			while(rs.next())
 			{
-				ContentModel content = new ContentModel();
-				content.setId(rs.getInt(1));
-				content.setTitle(rs.getString(2));
-				content.setBrief(rs.getString(3));
-				
-				listContents.add(content);
+				n = rs.getInt(1);
 			}
 		}
 		catch(SQLException e)
@@ -242,7 +240,75 @@ public class ContentDAO {
 			e.printStackTrace();
 		}
 		
+		return n;
+	}
+	
+	
+	public static int getAllContents(String search) {
+		
+		int n=0;
+		
+		String query = "SELECT COUNT(*) FROM MEMBER, CONTENT WHERE MEMBER.ID = CONTENT.AUTHORID AND (TITLE LIKE '%"+ search + "%' OR BRIEF LIKE '%" + search + "%')";
+		
+		try {
+			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
+			
+			ResultSet rs = ps.executeQuery();
+			
+		
+			
+			while(rs.next())
+			{
+				n = rs.getInt(1);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return n;
+	}
+	
+	
+	public static List<ContentModel> getAllContentsByAdmin (String search, int page){
+		List<ContentModel> listContents = new ArrayList<ContentModel>();
+		String query = "SELECT CONTENT.ID, CONTENT.TITLE, CONTENT.BRIEF, CONTENT.CREATEDATE, USERNAME\r\n"
+				+ "FROM CONTENT, MEMBER\r\n"
+				+ "WHERE CONTENT.AUTHORID = MEMBER.ID AND (TITLE LIKE '%"+ search + "%' OR BRIEF LIKE '%"+ search + "%') " +  "ORDER BY ID DESC LIMIT 10 OFFSET " + page;
+		
+		try {
+			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ContentModel content = new ContentModel();
+				content.setId(rs.getInt(1));
+				content.setTitle(rs.getString(2));
+				content.setBrief(rs.getString(3));
+				content.setCreateDate(rs.getTimestamp(4));
+				content.setUsername(rs.getString(5));
+				listContents.add(content);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return listContents;
 	}
+	
+	
+	public static void main(String[] args) {
+		List<ContentModel> lst = getAllContentsByAdmin("t", 0);
+		System.out.println(lst.size());
+		for (int i =0; i<lst.size(); ++i)
+		{
+			System.out.println(lst.get(i).getId());
+		}
+		
+		System.out.println(getAllContents(""));
+	}
+	
+
 
 }

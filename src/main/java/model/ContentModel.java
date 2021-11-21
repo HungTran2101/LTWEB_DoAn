@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class ContentModel {
 	private int id;
+	private String username;
 	private String title;
 	private String brief;
 	private String content;
@@ -16,6 +17,14 @@ public class ContentModel {
 		// TODO Auto-generated constructor stub
 	}
 
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	public int getId() {
 		return id;
 	}

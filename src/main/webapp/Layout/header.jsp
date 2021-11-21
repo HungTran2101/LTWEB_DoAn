@@ -14,8 +14,8 @@
                   <i class="fa fa-user blue" aria-hidden="true"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
-                  <li><a class="dropdown-item" href="MainController?action=editProfile"><i class="fa fa-user m" aria-hidden="true"></i> User profile</a></li>
-                  <li><a class="dropdown-item" href="MainController?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                  <li><a class="dropdown-item" href="editProfile.tiles"><i class="fa fa-user m" aria-hidden="true"></i> User profile</a></li>
+                  <li><a class="dropdown-item" href="login?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
                 </ul>
               </li>
             </ul>

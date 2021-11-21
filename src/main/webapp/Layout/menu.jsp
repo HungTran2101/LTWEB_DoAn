@@ -16,11 +16,11 @@
             </li>
             
             <li class="list-group-item list-group-item-action bg-light py-3">
-                <a class = "text-decoration-none blue fs-6" href= "MainController?action=viewContents"><i class="fa fa-table" aria-hidden="true"></i> View contents</a>
+                <a class = "text-decoration-none blue fs-6" href= "viewContents.tiles"><i class="fa fa-table" aria-hidden="true"></i> View contents</a>
             </li>
             
             <li class="list-group-item list-group-item-action bg-light py-3">
-                <a class = "text-decoration-none blue fs-6" href= "MainController?action=addContent"><i class="fa fa-edit" aria-hidden="true"></i> Form content</a>
+                <a class = "text-decoration-none blue fs-6" href= "addContent.tiles"><i class="fa fa-edit" aria-hidden="true"></i> Form content</a>
             </li>
         </ul>
 

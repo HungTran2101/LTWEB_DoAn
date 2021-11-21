@@ -59,6 +59,12 @@
                     Validator.requiredBrief("#brief"),
                     Validator.requiredContent("#content")
                 ]
-              });              
+              });   
+              
+              function resetFunc() {
+      	        document.getElementById("title").value = "";
+      	        document.getElementById("brief").value = "";
+      	        document.getElementById("content").value = "";
+      	    }
     	</script>
 </body>

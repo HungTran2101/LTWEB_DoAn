@@ -222,12 +222,9 @@ public class MemberDAO {
 
 	
 	public static void forgotPasswordHandler(String email)
-	{ 
-		
-		
+	{
 		String getPassword = getPasswordByEmail(email);
 		System.out.print(getPassword);
-		
 		
 		Properties properties = new Properties();
 
@@ -258,7 +255,26 @@ public class MemberDAO {
 		{
 			e.printStackTrace();
 		}
-		
-		
 	}
+	
+	public static boolean getRoleById() {
+		boolean role = false;
+		String query = "SELECT ROLE FROM MEMBER WHERE ID = ?";
+		
+		try {
+			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
+			ps.setInt(1, Constants.idMember);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				role = rs.getBoolean(1);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return role;
+	}
+	
 }

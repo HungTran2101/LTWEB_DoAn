@@ -1,9 +1,9 @@
-
 <body>
 	
 	
 	<%@ page import="model.ContentModel" %>
 	<%@ page import="dao.ContentDAO" %>
+	<%@ page import="dao.MemberDAO" %>
 	<%@ page import="java.util.List" %>
 	<%@ page import="java.util.ArrayList" %>
 	<%@ page import="java.text.SimpleDateFormat" %>
@@ -13,8 +13,9 @@
 		String search = request.getParameter("search");
 		
 		
-		//System.out.println(pageNumber);
-		//System.out.println(search);
+		
+		boolean role = MemberDAO.getRoleById();
+		
 		
 		int pagination = 1;
 		if (pageNumber != null)
@@ -23,20 +24,23 @@
 			search = "";
 		
 		
-		List<ContentModel> allContentBySearch = ContentDAO.getAllContentsBySearch(search);
-		int count = allContentBySearch.size();
+		int count = 0;
 		
+		List<ContentModel> lstContentsByPage;
+	
 		
-		
+		if (role==true){
+			count = ContentDAO.getAllContents(search);
+			lstContentsByPage = ContentDAO.getAllContentsByAdmin(search, (pagination-1)*10);
+		}
+		else{
+			count = ContentDAO.getAllContentsBySearch(search);
+			lstContentsByPage = ContentDAO.searchContents(search, (pagination-1)*10);
+		}
+			
 		int endPage = count/10;
 		if (count%10 != 0)
 			endPage++;
-		
-
-		
-		List<ContentModel> lstContentsByPage = ContentDAO.searchContents(search, 10*(pagination-1));
-
-		
 
 	%>
 	
@@ -46,37 +50,41 @@
 
 
 	<div id = "myView" class = "w3-animate-bottom">
-		<div class = "p-5 myView">
+		<div class = "p-4 myView">
 	        <h1>View Contents</h1>
 	        <hr />
-	        <h5 class = "border bg-light py-2 px-4 mb-0 rounded-top">View Content List</h5>
-	        <div class="p-4 border rounded-bottom">
-	        	<table class = "table table-bordered table-striped border">
-		            <thead>
-		            	<tr>
-			            	<th class="col1">#</th>
-			                <th class="col2">Title</th>
-			                <th class="col3">Brief</th>
-			                <th class="col4">Created Date</th> 
-			                <th class="col5">Action</th>
-		            	</tr>
-		            </thead>
-		            <tbody>
-						<%for (int i =0; i<lstContentsByPage.size(); ++i) {%>
-							<tr>
-								<td><%= lstContentsByPage.get(i).getId() %></td>
-								<td><%= lstContentsByPage.get(i).getTitle() %></td>
-								<td><%= lstContentsByPage.get(i).getBrief() %></td>
-								<td><%= new SimpleDateFormat("dd/MM/yyyy HH:mm").format(lstContentsByPage.get(i).getCreateDate()) %></td>
-								<td>
-									<button class = "green px-3 border-0"><a class = "text-decoration-none text-light" href = "editContent.tiles?id=<%=lstContentsByPage.get(i).getId()%>">Edit</a></button>
-									<button class = "bg-danger border-0"><a class = "text-decoration-none text-light" href = "delete?id=<%=lstContentsByPage.get(i).getId()%>">Delete</a></button>
-								</td>
-							</tr>
-						<%} %>
-		            </tbody>
-		        </table>
-	        </div>
+	        <h5 class = "border bg-light p-2 mb-0">Profile Form Element</h5>
+	        <table class = "table table-striped border">
+	            <thead>
+	            	<tr>
+		            	<th class = "border">#</th>
+		                <th class = "border">Title</th>
+		                <th class = "border">Brief</th>
+		                <th class = "border">Created Date</th>
+		                <%if (role == true){ %>
+		                <th class = "border">Username</th>
+		                <%} %>
+		                <th class = "border">Actions</th>
+	            	</tr>
+	            </thead>
+	            <tbody>
+					<%for (int i =0; i<lstContentsByPage.size(); ++i) {%>
+						<tr>
+							<td class = "border"><%= lstContentsByPage.get(i).getId() %></td>
+							<td class = "border"><%= lstContentsByPage.get(i).getTitle() %></td>
+							<td class = "border"><%= lstContentsByPage.get(i).getBrief() %></td>
+							<td class = "border"><%= new SimpleDateFormat("dd/MM/yyyy HH:mm").format(lstContentsByPage.get(i).getCreateDate()) %></td>
+							<%if (role == true) {%>
+							<td class = "border"><%= lstContentsByPage.get(i).getUsername() %></td>
+							<%} %>
+							<td class = "border">
+								<button class = "green px-3 border-0"><a class = "text-decoration-none text-light" href = "editContent.tiles?id=<%=lstContentsByPage.get(i).getId()%>">Edit</a></button>
+								<button class = "green border-0"><a class = "text-decoration-none text-light" href = "delete?id=<%=lstContentsByPage.get(i).getId()%>">Delete</a></button>
+							</td>
+						</tr>
+					<%} %>
+	            </tbody>
+	        </table>
 	        <div class = "myPage">
 				<nav aria-label="Page navigation example text-center">
 				  <ul class="pagination">
@@ -117,14 +125,16 @@
 				    </li>
 				<%} %>
 				  </ul>
-				</nav>
-	    	</div>
-		</div>
+			</nav>
+	    </div>
 	</div>
+</div>
+	
 	<script>
 		setTimeout(function(){
 			 document.getElementById("mySpinner").style.display = "none";
 			 document.getElementById("myView").style.display = "flex";
 		}, 5000)
 	</script>
+	
 </body>

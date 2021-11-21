@@ -19,6 +19,7 @@
             <div>
                 <input type="checkbox" name="rememberMe" id="rememberMe"/>
                 <label for="rememberMe">Remember Me</label>
+                <a href="forgotPass.tiles">forgot password</a>
             </div>
             <button type="submit" name="login">Login</button>
             <a href="register.tiles">Click here to register</a>
