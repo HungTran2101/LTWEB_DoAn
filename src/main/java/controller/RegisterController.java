@@ -41,15 +41,10 @@ public class RegisterController extends HttpServlet {
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String rePassword = request.getParameter("repassword");
 		
 		RequestDispatcher dispatcher;
 		
-		if(!password.equals(rePassword)) {
-			request.setAttribute(LogRes.requestResult, LogRes.rePassNotMatch);
-			dispatcher = request.getRequestDispatcher("register.tiles");
-		}	
-		else if (MemberDAO.registerMember(username, email, password))
+		if (MemberDAO.registerMember(username, email, password))
 		{
 			response.sendRedirect("login.tiles");
 			return;

@@ -11,7 +11,7 @@
         	<div class = "formInput">
         		<div>
 	                <label class = "mb-2">Title</label>
-	                <input id = "title" name = "title" type="text" class="form-control myInput" placeholder="Enter the title" aria-describedby="basic-addon1" required>
+	                <input id = "title" name = "title" pattern=".{10,200}" title="10 to 200 characters" maxlength="50" type="text" class="form-control myInput" placeholder="Enter the title" aria-describedby="basic-addon1" required>
             	</div>
             	<span class="form-message"></span>
         	</div>
@@ -19,7 +19,7 @@
 			<div class = "formInput">
 				<div>
 	                <label class = "mb-2">Brief</label>
-	                <textarea name = "brief" class="form-control myInput" id="brief" rows="3" required></textarea>
+	                <textarea name = "brief" minlength="30" maxlength="150" class="form-control myInput" id="brief" rows="3" required></textarea>
             	</div>
             	<span class="form-message"></span>
 			</div>
@@ -29,7 +29,7 @@
 			<div class = "formInput">
 				<div>
 	                <label class = "mb-2">Content</label>
-	                <textarea name = "content" class="form-control myInput" id="content" rows="5" required></textarea>
+	                <textarea name = "content" minlength="50" maxlength="1000" class="form-control myInput" id="content" rows="5" required></textarea>
             	</div>
             	<span class="form-message"></span>
 			</div>

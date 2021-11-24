@@ -62,7 +62,7 @@ public class MemberDAO {
 	{
 		boolean tableUpdate = false;
 		
-		String query = "INSERT INTO MEMBER (USERNAME, EMAIL, PASSWORD, CREATEDATE, UPDATETIME) VALUES (?,?,?, NOW(), NOW())";
+		String query = "INSERT INTO MEMBER (USERNAME, EMAIL, PASSWORD, CREATEDATE, UPDATETIME, ROLE) VALUES (?,?,?, NOW(), NOW(), 0)";
 		
 		try 
 		{
