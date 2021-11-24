@@ -12,30 +12,27 @@
 </head>
 <body class="body">
     <div class="Log_Res_container">
-        <form action="register" method="post" class="log_res_Form">
+        <form id="resform" action="register" method="post" class="log_res_Form">
             <span>Register</span>
-            <input type="text" name="username" placeholder="User name" required/>
-            <input type="email" name="email" placeholder="E-mail" required/>
-            <input type="password" name="password" placeholder="Password" required/>
-            <input type="password" name="repassword" placeholder="Re Password" required/>
-            <button type="submit" name="register">Register</button>
+            <input id="username" type="text" name="username" placeholder="User name"/>
+            <input id="email" type="text" name="email" placeholder="E-mail"/>
+            <input id="password" type="password" name="password" placeholder="Password"/>
+            <input id="repassword" type="password" name="repassword" placeholder="Re Password"/>
+            <button type="button" name="register" onclick="myRegister()">Register</button>
             <a href="login.tiles">Click here to login</a>
         </form>
+        <p id="warning" style="display: none; color: red; text-align: center; margin-top: 20px;"></p>
         <%
         	String result = (String)request.getAttribute(LogRes.requestResult);
             if(result != null){
             	if(result.equals(LogRes.registerFailed)){
         %>
-                	<p style="color: red; text-align: center; margin-top: 20px;">Register failed. Try again!</p>
+                	<p id="warning2" style="color: red; text-align: center; margin-top: 20px;">Register failed. Try again!</p>
         <%    		
-            	}
-            	else if(result.equals(LogRes.rePassNotMatch)){
-        %>
-                	<p style="color: red; text-align: center; margin-top: 20px;">Confirm password is not match!</p>
-        <%
             	}
             }
         %>
     </div>
 </body>
+<script type="text/javascript" src="Views/assets/logresValid.js"></script>
 </html>

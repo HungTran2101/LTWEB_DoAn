@@ -20,17 +20,17 @@
 		            <input type="hidden" readonly name = "id" aria-describedby="basic-addon1" value ="<%=content.getId()%>">
 		            <div class = "formInput">
 		                <label class = "mb-2">Title</label>
-		                <input name = "title" type="text" class="form-control myInput" placeholder="Enter the title" aria-describedby="basic-addon1" value="<%=content.getTitle()%>">
+		                <input name = "title" type="text" pattern=".{10,200}" title="10 to 200 characters" maxlength="50" required class="form-control myInput" placeholder="Enter the title" aria-describedby="basic-addon1" value="<%=content.getTitle()%>">
 		            </div>
 		
 		            <div class = "formInput">
 		                <label class = "mb-2">Brief</label>
-		                <textarea name = "brief" class="form-control myInput" id="exampleFormControlTextarea1" rows="2"><%=content.getBrief() %></textarea>
+		                <textarea name = "brief" minlength="30" maxlength="150" required class="form-control myInput" id="exampleFormControlTextarea1" rows="2"><%=content.getBrief() %></textarea>
 		            </div>
 		
 		            <div class = "formInput">
 		                <label class = "mb-2">Content</label>
-		                <textarea name = "content" class="form-control myInput" id="exampleFormControlTextarea1" rows="4"><%=content.getContent() %></textarea>
+		                <textarea name = "content" minlength="50" maxlength="1000" required class="form-control myInput" id="exampleFormControlTextarea1" rows="4"><%=content.getContent() %></textarea>
 		            </div>
 		
 		            <div class = "mt-2 myFrame">

@@ -12,28 +12,29 @@
 </head>
 <body class="body">
     <div class="Log_Res_container">
-        <form action="login" method="post" class="log_res_Form">
+        <form id="logform" action="login" method="post" class="log_res_Form">
             <span>Please Sign In</span>
-            <input type="email" name="email" placeholder="E-mail" required/>
-            <input type="password" name="password" placeholder="Password" required/>
+            <input id="email" type="text" name="email" placeholder="E-mail"/>
+            <input id="password" type="password" name="password" placeholder="Password"/>
             <div>
-                <input type="checkbox" name="rememberMe" id="rememberMe"/>
-                <label for="rememberMe">Remember Me</label>
-                <a href="forgotPass.tiles">forgot password</a>
+                <label for="rememberMe"><input type="checkbox" name="rememberMe" id="rememberMe"/>Remember Me</label>
+                <a style="margin: 0;" href="forgotPass.tiles">forgot password</a>
             </div>
-            <button type="submit" name="login">Login</button>
+            <button type="button" name="login" onclick="myLogin()">Login</button>
             <a href="register.tiles">Click here to register</a>
         </form>
+        <p id="warning" style="display: none; color: red; text-align: center; margin-top: 20px;"></p>
         <%
         	String result = (String)request.getAttribute(LogRes.requestResult);
             if(result != null){
             	if(result.equals(LogRes.wrongAccount)){
         %>
-                	<p style="color: red; text-align: center; margin-top: 20px;">Your email or password is incorrect!</p>
+                	<p id="warning2" style="color: red; text-align: center; margin-top: 20px;">Your email or password is incorrect!</p>
         <%    		
             	}
             }
         %>
     </div>
 </body>
+<script type="text/javascript" src="Views/assets/logresValid.js"></script>
 </html>

@@ -7,6 +7,6 @@
 <title>Login</title>
 </head>
 <body>
-	<%response.sendRedirect("MainController"); %>
+	<%response.sendRedirect("login"); %>
 </body>
 </html>

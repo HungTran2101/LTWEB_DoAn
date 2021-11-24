@@ -53,38 +53,40 @@
 		<div class = "p-4 myView">
 	        <h1>View Contents</h1>
 	        <hr />
-	        <h5 class = "border bg-light p-2 mb-0">Profile Form Element</h5>
-	        <table class = "table table-striped border">
-	            <thead>
-	            	<tr>
-		            	<th class = "border">#</th>
-		                <th class = "border">Title</th>
-		                <th class = "border">Brief</th>
-		                <th class = "border">Created Date</th>
-		                <%if (role == true){ %>
-		                <th class = "border">Username</th>
-		                <%} %>
-		                <th class = "border">Actions</th>
-	            	</tr>
-	            </thead>
-	            <tbody>
-					<%for (int i =0; i<lstContentsByPage.size(); ++i) {%>
-						<tr>
-							<td class = "border"><%= lstContentsByPage.get(i).getId() %></td>
-							<td class = "border"><%= lstContentsByPage.get(i).getTitle() %></td>
-							<td class = "border"><%= lstContentsByPage.get(i).getBrief() %></td>
-							<td class = "border"><%= new SimpleDateFormat("dd/MM/yyyy HH:mm").format(lstContentsByPage.get(i).getCreateDate()) %></td>
-							<%if (role == true) {%>
-							<td class = "border"><%= lstContentsByPage.get(i).getUsername() %></td>
-							<%} %>
-							<td class = "border">
-								<button class = "green px-3 border-0"><a class = "text-decoration-none text-light" href = "editContent.tiles?id=<%=lstContentsByPage.get(i).getId()%>">Edit</a></button>
-								<button class = "green border-0"><a class = "text-decoration-none text-light" href = "delete?id=<%=lstContentsByPage.get(i).getId()%>">Delete</a></button>
-							</td>
-						</tr>
-					<%} %>
-	            </tbody>
-	        </table>
+	        <h5 class = "border bg-light p-2 px-3 mb-0 rounded-top">View Content List</h5>
+	        <div class="p-3 border border-top-0 rounded-bottom">
+		        <table class = "table table-striped border">
+		            <thead>
+		            	<tr>
+			            	<th class = "border">#</th>
+			                <th class = "border">Title</th>
+			                <th class = "border">Brief</th>
+			                <th class = "border">Created Date</th>
+			                <%if (role == true){ %>
+			                <th class = "border">Username</th>
+			                <%} %>
+			                <th class = "border">Actions</th>
+		            	</tr>
+		            </thead>
+		            <tbody>
+						<%for (int i =0; i<lstContentsByPage.size(); ++i) {%>
+							<tr>
+								<td class = "border"><%= lstContentsByPage.get(i).getId() %></td>
+								<td class = "border"><%= lstContentsByPage.get(i).getTitle() %></td>
+								<td class = "border"><%= lstContentsByPage.get(i).getBrief() %></td>
+								<td class = "border"><%= new SimpleDateFormat("dd/MM/yyyy HH:mm").format(lstContentsByPage.get(i).getCreateDate()) %></td>
+								<%if (role == true) {%>
+								<td class = "border"><%= lstContentsByPage.get(i).getUsername() %></td>
+								<%} %>
+								<td class = "border">
+									<button class = "green px-3 border-0"><a class = "text-decoration-none text-light" href = "editContent.tiles?id=<%=lstContentsByPage.get(i).getId()%>">Edit</a></button>
+									<button class = "green border-0"><a class = "text-decoration-none text-light" href = "delete?id=<%=lstContentsByPage.get(i).getId()%>">Delete</a></button>
+								</td>
+							</tr>
+						<%} %>
+		            </tbody>
+		        </table>
+	        </div>
 	        <div class = "myPage">
 				<nav aria-label="Page navigation example text-center">
 				  <ul class="pagination">

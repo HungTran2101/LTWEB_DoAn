@@ -28,6 +28,7 @@
 .log_res_Form div{
     display:flex;
     align-items: center;
+    justify-content: space-between;
     margin: 5px 20px 5px 20px;
 }
 .log_res_Form div input{
@@ -103,7 +104,7 @@
 }
 
 .myView {
-   		width: 80vw;
+   	width: 80vw;
 }
 
 .myPage{
@@ -113,11 +114,8 @@
 
 .myAddForm {
 	width: 80%;
+	flex: 3;
 }
-
-.myAddForm {
-   	flex: 3;
-   }
    
 .test {
 	display: flex;
@@ -149,16 +147,16 @@ label {
 
 .invalid{
        border-color: red;
-    }
-   .formInput{
-       margin-top: 10px;
-       margin-bottom: 2rem;
-       padding-left: 1rem;
-   }
-   .form-message{
-       position:absolute;
-       color: red;
-   }
+}
+.formInput{
+    margin-top: 10px;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+}
+.form-message{
+    position:absolute;
+    color: red;
+}
 .myBtn{
 	width: fit-content;
     padding: 10px 15px;

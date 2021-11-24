@@ -15,12 +15,12 @@
 	        
 	            <div class = "myFrame">
 	                <label class = "mb-2">First Name</label>
-	                <input onkeyup="setValue()" id = "firstName" name = "firstName" type="text" class="form-control myInput" placeholder="Enter the first name" aria-describedby="basic-addon1" value = <%=member.getFirstName() %>>
+	                <input onkeyup="setValue()" id = "firstName" name = "firstName" type="text" pattern=".{3,30}" title="3 to 30 characters" maxlength="50" required class="form-control myInput" placeholder="Enter the first name" aria-describedby="basic-addon1" value = "<%=member.getFirstName() %>">
 	            </div>
 	
 	            <div class = "mt-2 myFrame">
 	                <label class = "mb-2">Last Name</label>
-	                <input name = "lastName" type="text" class="form-control myInput" placeholder="Enter the last name" aria-describedby="basic-addon1" value = <%=member.getLastName() %>>
+	                <input name = "lastName" type="text" pattern=".{3,30}" title="3 to 30 characters" maxlength="50" required class="form-control myInput" placeholder="Enter the last name" aria-describedby="basic-addon1" value = "<%=member.getLastName() %>">
 	            </div>
 	
 	            <div class = "mt-2 myFrame">
@@ -30,12 +30,12 @@
 	
 	            <div class = "mt-2 myFrame">
 	                <label class = "mb-2">Phone</label>
-	                <input name = "phone" type="text" class="form-control myInput" placeholder="Enter your phone number" aria-describedby="basic-addon1" value = <%=member.getPhone() %>>
+	                <input name = "phone" type="text" pattern=".{9,13}" title="9 to 13 characters" required class="form-control myInput" placeholder="Enter your phone number" aria-describedby="basic-addon1" value = "<%=member.getPhone() %>">
 	            </div>
 	
 	            <div class = "mt-2 myFrame">
 	                <label class = "mb-2">Description</label>
-	                <textarea name = "description" class="form-control myInput" id="exampleFormControlTextarea1" rows="3"><%=member.getDescription() %></textarea>
+	                <textarea name = "description" maxlength="200" class="form-control myInput" id="exampleFormControlTextarea1" rows="3"><%=member.getDescription() %></textarea>
 	            </div>
 	
 	            <div class = "mt-2 myFrame">
