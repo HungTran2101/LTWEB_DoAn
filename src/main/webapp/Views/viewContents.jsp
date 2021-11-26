@@ -27,21 +27,25 @@
 		int count = 0;
 		
 		List<ContentModel> lstContentsByPage;
-	
+		
 		
 		if (role==true){
-			count = ContentDAO.getAllContents(search);
-			lstContentsByPage = ContentDAO.getAllContentsByAdmin(search, (pagination-1)*10);
+			count = ContentDAO.numberOfContents(search);
+			lstContentsByPage = ContentDAO.getSearchContentsByAdmin(search, (pagination-1)*10);
 		}
 		else{
-			count = ContentDAO.getAllContentsBySearch(search);
-			lstContentsByPage = ContentDAO.searchContents(search, (pagination-1)*10);
+			count = ContentDAO.numberOfContentsMember(search);
+			lstContentsByPage = ContentDAO.getSearchContentsByMember(search, (pagination-1)*10);
 		}
 			
 		int endPage = count/10;
 		if (count%10 != 0)
 			endPage++;
-
+		
+		
+		
+		if (endPage==0)
+			endPage = 1;
 	%>
 	
 	<div id = "mySpinner">
@@ -58,27 +62,27 @@
 		        <table class = "table table-striped border">
 		            <thead>
 		            	<tr>
-			            	<th class = "border">#</th>
-			                <th class = "border">Title</th>
-			                <th class = "border">Brief</th>
-			                <th class = "border">Created Date</th>
+			            	<th class = "border col1">#</th>
+			                <th class = "border col2">Title</th>
+			                <th class = "border col3">Brief</th>
+			                <th class = "border col4">Created Date</th>
 			                <%if (role == true){ %>
 			                <th class = "border">Username</th>
 			                <%} %>
-			                <th class = "border">Actions</th>
+			                <th class = "border col5">Actions</th>
 		            	</tr>
 		            </thead>
 		            <tbody>
 						<%for (int i =0; i<lstContentsByPage.size(); ++i) {%>
 							<tr>
-								<td class = "border"><%= lstContentsByPage.get(i).getId() %></td>
-								<td class = "border"><%= lstContentsByPage.get(i).getTitle() %></td>
-								<td class = "border"><%= lstContentsByPage.get(i).getBrief() %></td>
-								<td class = "border"><%= new SimpleDateFormat("dd/MM/yyyy HH:mm").format(lstContentsByPage.get(i).getCreateDate()) %></td>
+								<td class = "border col1"><%= lstContentsByPage.get(i).getId() %></td>
+								<td class = "border col2"><%= lstContentsByPage.get(i).getTitle() %></td>
+								<td class = "border col3"><%= lstContentsByPage.get(i).getBrief() %></td>
+								<td class = "border col4"><%= new SimpleDateFormat("dd/MM/yyyy HH:mm").format(lstContentsByPage.get(i).getCreateDate()) %></td>
 								<%if (role == true) {%>
 								<td class = "border"><%= lstContentsByPage.get(i).getUsername() %></td>
 								<%} %>
-								<td class = "border">
+								<td class = "border col5">
 									<button class = "green px-3 border-0"><a class = "text-decoration-none text-light" href = "editContent.tiles?id=<%=lstContentsByPage.get(i).getId()%>">Edit</a></button>
 									<button class = "green border-0"><a class = "text-decoration-none text-light" href = "delete?id=<%=lstContentsByPage.get(i).getId()%>">Delete</a></button>
 								</td>
@@ -93,7 +97,7 @@
 				  	<%if (pagination == 1) {%>
 					    <li class="page-item disabled">
 					      <a class="page-link" href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
+					        <span  aria-hidden="true">&laquo;</span>
 					        <span class="sr-only">Previous</span>
 					      </a>
 					    </li>
@@ -107,9 +111,9 @@
 					<%} %>
 		        <%for (int i=1; i<=endPage; ++i) {%>
 		        	<%if (i == pagination) {%>
-		        		<li class="page-item active"><a class = "page-link" href = "viewContents.tiles?pageNumber=<%=i%>&search=<%=search %>"><%=i %></a></li>
+		        		<li class="page-item active"><a class = "page-link myActive" href = "viewContents.tiles?pageNumber=<%=i%>&search=<%=search %>"><%=i %></a></li>
 		        	<%}else {%>
-		        		<li class="page-item"><a class = "page-link" href = "viewContents.tiles?pageNumber=<%=i%>&search=<%=search %>"><%=i %></a></li>
+		        		<li class="page-item"><a class = "page-link myItem" href = "viewContents.tiles?pageNumber=<%=i%>&search=<%=search %>"><%=i %></a></li>
 		        <%}} %>
 		        <%if (pagination == endPage) { %>
 	     			<li class="page-item disabled">

@@ -62,6 +62,7 @@ public class MemberDAO {
 	{
 		boolean tableUpdate = false;
 		
+		
 		String query = "INSERT INTO MEMBER (USERNAME, EMAIL, PASSWORD, CREATEDATE, UPDATETIME, ROLE) VALUES (?,?,?, NOW(), NOW(), 0)";
 		
 		try 
@@ -113,9 +114,10 @@ public class MemberDAO {
 		}
 		
 		if(count == 0)
-			return true;
-		return false;
+			return false;
+		return true;
 	}
+	
 	
 	public static MemberModel getMemberById(int id)
 	{
@@ -168,6 +170,8 @@ public class MemberDAO {
 		return member;
 	}
 
+	
+	
 	public static boolean editProfile (String firstName, String lastName, String phone, String description)
 	{
 		boolean tableUpdate = false;
@@ -195,68 +199,47 @@ public class MemberDAO {
 		return tableUpdate;
 	}
 
-	public static String getPasswordByEmail(String email)
-	{
-		String password = "";
-		
-		String query = "SELECT PASSWORD FROM MEMBER WHERE EMAIL = ?";
-		
-		try {
-			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
-			ps.setString(1, email);
-			
-			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next())
-			{
-				password = rs.getString(1);
-			}
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-		
-		return password;
-	}
-
 	
-	public static void forgotPasswordHandler(String email)
-	{
-		String getPassword = getPasswordByEmail(email);
-		System.out.print(getPassword);
-		
-		Properties properties = new Properties();
-
-	    properties.put("mail.smtp.auth", "true");
-	    properties.put("mail.smtp.starttls.enable", "true");
-	    properties.put("mail.smtp.host", "smtp.gmail.com");
-	    properties.put("mail.smtp.port", "587");
-	    Authenticator auth = new Authenticator() {
-            public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(Constants.myEmail, Constants.myPassword);
-            }
-        };
-        
-        Session session = Session.getInstance(properties, auth);
-		//session.setDebug(true);
-		try {
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(Constants.myEmail));
-			message.addRecipient(
-				Message.RecipientType.TO,
-				new InternetAddress(email)
-			);
-			message.setSubject("Get back your password");
-			message.setText(getPassword);
-			Transport.send(message);
-		}
-		catch(MessagingException e)
-		{
-			e.printStackTrace();
-		}
-	}
 	
+//	public static void forgotPasswordHandler(String email)
+//	{
+//		String getPassword = getPasswordByEmail(email);
+//		System.out.print(getPassword);
+//		
+//		Properties properties = new Properties();
+//
+//	    properties.put("mail.smtp.auth", "true");
+//	    properties.put("mail.smtp.starttls.enable", "true");
+//	    properties.put("mail.smtp.host", "smtp.gmail.com");
+//	    properties.put("mail.smtp.port", "587");
+//	    Authenticator auth = new Authenticator() {
+//            public PasswordAuthentication getPasswordAuthentication() {
+//                return new PasswordAuthentication(Constants.myEmail, Constants.myPassword);
+//            }
+//        };
+//        
+//        Session session = Session.getInstance(properties, auth);
+//		//session.setDebug(true);
+//		try {
+//			MimeMessage message = new MimeMessage(session);
+//			message.setFrom(new InternetAddress(Constants.myEmail));
+//			message.addRecipient(
+//				Message.RecipientType.TO,
+//				new InternetAddress(email)
+//			);
+//			message.setSubject("Get back your password");
+//			message.setText(getPassword);
+//			Transport.send(message);
+//		}
+//		catch(MessagingException e)
+//		{
+//			e.printStackTrace();
+//		}
+//	}
+	
+	
+	
+	//to get role to render view
 	public static boolean getRoleById() {
 		boolean role = false;
 		String query = "SELECT ROLE FROM MEMBER WHERE ID = ?";

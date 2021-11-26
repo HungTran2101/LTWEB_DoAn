@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Views/css/style.css">
+    <link rel="stylesheet" href="utils/css/style.css">
     <title>Login</title>
 </head>
 <body class="body">
@@ -18,7 +18,6 @@
             <input id="password" type="password" name="password" placeholder="Password"/>
             <div>
                 <label for="rememberMe"><input type="checkbox" name="rememberMe" id="rememberMe"/>Remember Me</label>
-                <a style="margin: 0;" href="forgotPass.tiles">forgot password</a>
             </div>
             <button type="button" name="login" onclick="myLogin()">Login</button>
             <a href="register.tiles">Click here to register</a>
@@ -36,5 +35,5 @@
         %>
     </div>
 </body>
-<script type="text/javascript" src="Views/assets/logresValid.js"></script>
+<script type="text/javascript" src="utils/assets/logresValid.js"></script>
 </html>

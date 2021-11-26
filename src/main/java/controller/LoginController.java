@@ -51,6 +51,7 @@ public class LoginController extends HttpServlet {
 			Cookie[] cookies = request.getCookies();
 			for(Cookie ck : cookies) {
 				if(ck.getName().equals("userID")) {
+					Constants.idMember = -1;
 					ck.setMaxAge(0);
 					response.addCookie(ck);
 				}

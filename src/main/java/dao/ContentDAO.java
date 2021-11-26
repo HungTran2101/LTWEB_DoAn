@@ -28,6 +28,7 @@ public class ContentDAO {
 			ps.setString(3, content);
 			ps.setInt(4,Constants.idMember);
 			
+			//return 0: not update table
 			tableUpdate = ps.executeUpdate()>0;
 			
 			ps.close();
@@ -36,6 +37,7 @@ public class ContentDAO {
 		{
 			e.printStackTrace();
 		}
+		
 		
 		return tableUpdate;
 	}
@@ -92,17 +94,17 @@ public class ContentDAO {
 	}
 
 	
+	//for editContent.jsp
 	public static ContentModel getContentById(int id)
 	{
 		ContentModel content = new ContentModel();
 		
-		String query= "SELECT * FROM CONTENT WHERE ID = ? AND AUTHORID = ?";
+		String query= "SELECT * FROM CONTENT WHERE ID = ?";
 		
 		try 
 		{
 			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
 			ps.setInt(1, id);
-			ps.setInt(2, Constants.idMember);
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -123,31 +125,6 @@ public class ContentDAO {
 		return content;
 	}
 	
-	
-	
-	//get all content to make number of pages
-	public static int getAllContentsById()
-	{
-		
-		String query = "SELECT ID, TITLE, BRIEF, CREATEDATE FROM CONTENT WHERE AUTHORID = ?";
-		int count = 0;
-		try {
-			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
-			ps.setInt(1, Constants.idMember);		
-			ResultSet rs = ps.executeQuery();
-			
-			
-			while(rs.next())
-			{
-				count++;
-			}
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return count;
-	}
 	
 	
 	//get content to  page
@@ -183,75 +160,21 @@ public class ContentDAO {
 
 
 
-	public static List<ContentModel> searchContents (String search, int page)
-	{
-		//Constants.idMember = 1;
-		List<ContentModel> lst = new ArrayList<ContentModel>();
-		String query = "SELECT ID, TITLE, BRIEF, CREATEDATE FROM CONTENT WHERE (TITLE LIKE '%" + search + "%' OR BRIEF LIKE '%" + search + "%') AND AUTHORID =" + Constants.idMember +" ORDER BY ID DESC LIMIT 10 OFFSET " + page;
-		
-		try 
-		{
-			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
-			
-			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next())
-			{
-				ContentModel content = new ContentModel();
-				content.setId(rs.getInt(1));
-				content.setTitle(rs.getString(2));
-				content.setBrief(rs.getString(3));
-				content.setCreateDate(rs.getTimestamp(4));
-				
-				
-				lst.add(content);
-			}
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		
-		return lst;
-	}
-	
-	public static int getAllContentsBySearch(String search)
-	{
-		
-		int n = 0;
-		
-		String query = "SELECT COUNT(*) FROM CONTENT WHERE (TITLE LIKE '%" + search + "%' OR BRIEF LIKE '%" + search + "%') AND AUTHORID =" + Constants.idMember;
-		
-		
-		
-		try 
-		{
-			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
-			
-			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next())
-			{
-				n = rs.getInt(1);
-			}
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-		
-		return n;
-	}
 	
 	
-	public static int getAllContents(String search) {
+
+	
+	//return number of contents to calculate pages
+	public static int numberOfContents(String search) {
 		
 		int n=0;
 		
-		String query = "SELECT COUNT(*) FROM MEMBER, CONTENT WHERE MEMBER.ID = CONTENT.AUTHORID AND (TITLE LIKE '%"+ search + "%' OR BRIEF LIKE '%" + search + "%')";
+		String query = "SELECT COUNT(*) FROM MEMBER, CONTENT WHERE MEMBER.ID = CONTENT.AUTHORID AND (TITLE LIKE ? OR BRIEF LIKE ?)";
 		
 		try {
 			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
+			ps.setString(1, "%"+search+"%");
+			ps.setString(2, "%"+search+"%");
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -270,14 +193,88 @@ public class ContentDAO {
 	}
 	
 	
-	public static List<ContentModel> getAllContentsByAdmin (String search, int page){
-		List<ContentModel> listContents = new ArrayList<ContentModel>();
-		String query = "SELECT CONTENT.ID, CONTENT.TITLE, CONTENT.BRIEF, CONTENT.CREATEDATE, USERNAME\r\n"
-				+ "FROM CONTENT, MEMBER\r\n"
-				+ "WHERE CONTENT.AUTHORID = MEMBER.ID AND (TITLE LIKE '%"+ search + "%' OR BRIEF LIKE '%"+ search + "%') " +  "ORDER BY ID DESC LIMIT 10 OFFSET " + page;
+	public static int numberOfContentsMember(String search) {
+		
+		int n=0;
+		
+		String query = "SELECT COUNT(*) FROM CONTENT WHERE AUTHORID = ? AND (TITLE LIKE ? OR BRIEF LIKE ?)";
 		
 		try {
 			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
+			ps.setInt(1, Constants.idMember);
+			ps.setString(2, "%"+search+"%");
+			ps.setString(3, "%"+search+"%");
+			
+			ResultSet rs = ps.executeQuery();
+			
+		
+			
+			while(rs.next())
+			{
+				n = rs.getInt(1);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return n;
+	
+	}
+
+	
+	
+	//show contents for member's view
+	public static List<ContentModel> getSearchContentsByMember (String search, int page)
+	{
+		List<ContentModel> lst = new ArrayList<ContentModel>();
+		String query = "SELECT ID, TITLE, BRIEF, CREATEDATE FROM CONTENT WHERE (ID LIKE ? OR TITLE LIKE ? OR BRIEF LIKE ?) AND AUTHORID = ? ORDER BY ID DESC LIMIT 10 OFFSET ?";
+			
+		try 
+		{
+			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
+			ps.setString(1, "%"+search+"%");
+			ps.setString(2, "%"+search+"%");
+			ps.setString(3, "%"+search+"%");
+			ps.setInt(4, Constants.idMember);
+			ps.setInt(5, page);
+			ResultSet rs = ps.executeQuery();
+				
+			while(rs.next())
+			{
+				ContentModel content = new ContentModel();
+				content.setId(rs.getInt(1));
+				content.setTitle(rs.getString(2));
+				content.setBrief(rs.getString(3));
+				content.setCreateDate(rs.getTimestamp(4));
+					
+					
+				lst.add(content);
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+			
+		return lst;
+	}
+		
+	
+	
+	
+	//show contents for admin's view
+	public static List<ContentModel> getSearchContentsByAdmin (String search, int page){
+		List<ContentModel> listContents = new ArrayList<ContentModel>();
+		String query = "SELECT CONTENT.ID, CONTENT.TITLE, CONTENT.BRIEF, CONTENT.CREATEDATE, USERNAME FROM CONTENT, MEMBER WHERE CONTENT.AUTHORID = MEMBER.ID AND (CONTENT.ID LIKE ? OR TITLE LIKE ? OR BRIEF LIKE ? OR USERNAME LIKE ?) ORDER BY ID DESC LIMIT 10 OFFSET ?" ;
+		
+		try {
+			PreparedStatement ps = DB.getJDBCConnection().prepareStatement(query);
+			ps.setString(1, "%"+search+"%");
+			ps.setString(2, "%"+search+"%");
+			ps.setString(3, "%"+search+"%");
+			ps.setString(4, "%"+search+"%");
+			ps.setInt(5, page);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -297,17 +294,6 @@ public class ContentDAO {
 		return listContents;
 	}
 	
-	
-	public static void main(String[] args) {
-		List<ContentModel> lst = getAllContentsByAdmin("t", 0);
-		System.out.println(lst.size());
-		for (int i =0; i<lst.size(); ++i)
-		{
-			System.out.println(lst.get(i).getId());
-		}
-		
-		System.out.println(getAllContents(""));
-	}
 	
 
 

@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
     <%@ page import="common.LogRes" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="ISO-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Views/css/style.css">
+    <link rel="stylesheet" href="utils/css/style.css">
     <title>Register</title>
 </head>
 <body class="body">
@@ -30,9 +30,14 @@
                 	<p id="warning2" style="color: red; text-align: center; margin-top: 20px;">Register failed. Try again!</p>
         <%    		
             	}
+            	else if (result.equals(LogRes.existedEmail)){
+         %>
+            		<p id="warning2" style="color: red; text-align: center; margin-top: 20px;">Existed email. Try again!</p>
+         <% 
+            	}
             }
         %>
     </div>
 </body>
-<script type="text/javascript" src="Views/assets/logresValid.js"></script>
+<script type="text/javascript" src="utils/assets/logresValid.js"></script>
 </html>

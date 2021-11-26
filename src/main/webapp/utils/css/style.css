@@ -28,7 +28,6 @@
 .log_res_Form div{
     display:flex;
     align-items: center;
-    justify-content: space-between;
     margin: 5px 20px 5px 20px;
 }
 .log_res_Form div input{
@@ -109,7 +108,7 @@
 
 .myPage{
    	width: fit-content;
-    margin:auto auto;
+   	margin: auto auto;
 }
 
 .myAddForm {
@@ -217,3 +216,21 @@ label {
 .green{
 	background-color: #5cb85c;
 }
+
+td, th{
+	word-wrap: break-word;
+}
+
+.myBtn_01:hover{
+	background-color: rgba(180,176,176, 0.5);
+}
+
+.myActive{
+	background-color: #5cb85c !important;
+}
+
+.myItem{
+	color: #5cb85c !important;
+}
+
+

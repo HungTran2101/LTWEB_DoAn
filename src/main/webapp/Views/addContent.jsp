@@ -49,7 +49,7 @@
     </div>
 	</div>
 	
-	<script src = "Views/assets/valid.js"></script>
+	<script src = "utils/assets/valid.js"></script>
        	<script>
               Validator({
                 form: '#myForm',

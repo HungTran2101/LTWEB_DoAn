@@ -2,7 +2,6 @@
 <body>
 	<%@ page import="model.MemberModel" %>
 	<%@ page import="dao.MemberDAO" %>
-	<%@ page import="common.Constants" %>
 	<%
 		MemberModel member = MemberDAO.getMemberById((Integer)request.getSession().getAttribute("userID"));
 	%>
@@ -15,7 +14,7 @@
 	        
 	            <div class = "myFrame">
 	                <label class = "mb-2">First Name</label>
-	                <input onkeyup="setValue()" id = "firstName" name = "firstName" type="text" pattern=".{3,30}" title="3 to 30 characters" maxlength="50" required class="form-control myInput" placeholder="Enter the first name" aria-describedby="basic-addon1" value = "<%=member.getFirstName() %>">
+	                <input id = "firstName" name = "firstName" type="text" pattern=".{3,30}" title="3 to 30 characters" maxlength="50" required class="form-control myInput" placeholder="Enter the first name" aria-describedby="basic-addon1" value = "<%=member.getFirstName() %>">
 	            </div>
 	
 	            <div class = "mt-2 myFrame">
@@ -40,27 +39,11 @@
 	
 	            <div class = "mt-2 myFrame">
 	                <input class = "myBtn" type = "submit" value = "Submit Button"/>
-	                <button type="button" class = "myBtn"><a class = "text-decoration-none text-dark" href = "editProfile.tiles">Reset Button</a></button>
-	                
+	                <button type="button" class = "myBtn"><a class = "text-decoration-none text-dark" href = "editProfile.tiles">Reset Button</a></button>	                
 	            </div>
 	        </form>
 	    </div>
 	</div>
 	
-	<script>
-    function resetFunc() {
-        document.getElementById("firstName").value = "";
-        document.getElementById("lastName").value = "";
-        document.getElementById("phone").value = "";
-        document.getElementById("description").value = "";
-    }
-    
-    const setValue = () => {
-    	const test = document.getElementById("firstName").value;
-    	console.log(test);
-    	
-    }
-    
-	</script>
     
 </body>

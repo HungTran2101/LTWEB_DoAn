@@ -8,7 +8,7 @@
         <ul class="list-group bg-light myMenu w3-animate-left border-right">
             <li class="list-group-item bg-light py-3 border-top-0">
                 <div class="input-group bg-light">
-                	<form action = "viewContents.tiles" method = "get" class = "d-flex">
+                	<form action = "viewContents.tiles" method = "post" class = "d-flex">
                 		<input name = "search" type="text" class="form-control mySearchInput" placeholder="Search..." aria-label="Search..." aria-describedby="button-addon2" value = "<%=search%>">
 	                    <button class="btn btn-outline-secondary mySearchBtn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 	</form>

@@ -4,7 +4,7 @@
 	<%@ page import="dao.ContentDAO" %>
 	<%
 		int id = Integer.parseInt(request.getParameter("id"));
-	
+		System.out.print(id);
 		ContentModel content = ContentDAO.getContentById(id);
 		System.out.println("from jsp: " + content.getTitle());
 		
@@ -41,12 +41,4 @@
 	        </div>
     	</div>
 	</div>
-	
-	<script>
-		function resetFunc() {
-	        document.getElementById("title").value = "";
-	        document.getElementById("brief").value = "";
-	        document.getElementById("content").value = "";
-	    }
-	</script>
 </body>

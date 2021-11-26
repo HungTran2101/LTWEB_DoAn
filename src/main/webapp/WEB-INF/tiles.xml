@@ -19,9 +19,6 @@
   <definition name="register" template="/Views/register.jsp">
   </definition>
   
-  <!-- Forgot password -->
-  <definition name="forgotPass" template="/Views/forgotPass.jsp">
-  </definition>
   
   <!-- Add content page -->
   <definition name="addContent" extends="main">
